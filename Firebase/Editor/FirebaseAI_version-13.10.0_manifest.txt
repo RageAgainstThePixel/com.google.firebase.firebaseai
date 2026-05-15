@@ -14,6 +14,7 @@ Assets/Firebase/FirebaseAI/Imagen/ImagenSafety.cs
 Assets/Firebase/FirebaseAI/Internal/EnumConverters.cs
 Assets/Firebase/FirebaseAI/Internal/HttpHelpers.cs
 Assets/Firebase/FirebaseAI/Internal/InternalHelpers.cs
+Assets/Firebase/FirebaseAI/JsonSchema.cs
 Assets/Firebase/FirebaseAI/LiveGenerationConfig.cs
 Assets/Firebase/FirebaseAI/LiveGenerativeModel.cs
 Assets/Firebase/FirebaseAI/LiveSession.cs
@@ -24,6 +25,9 @@ Assets/Firebase/FirebaseAI/RequestOptions.cs
 Assets/Firebase/FirebaseAI/ResponseModality.cs
 Assets/Firebase/FirebaseAI/Safety.cs
 Assets/Firebase/FirebaseAI/Schema.cs
+Assets/Firebase/FirebaseAI/Serialization.cs
+Assets/Firebase/FirebaseAI/TemplateChatSession.cs
 Assets/Firebase/FirebaseAI/TemplateGenerativeModel.cs
+Assets/Firebase/FirebaseAI/TemplateTool.cs
 Assets/Firebase/FirebaseAI/URLContext.cs
 Assets/package.json
