@@ -12,7 +12,6 @@ Assets/Firebase/FirebaseAI/Imagen/ImagenModel.cs
 Assets/Firebase/FirebaseAI/Imagen/ImagenResponse.cs
 Assets/Firebase/FirebaseAI/Imagen/ImagenSafety.cs
 Assets/Firebase/FirebaseAI/Internal/EnumConverters.cs
-Assets/Firebase/FirebaseAI/Internal/FirebaseInterops.cs
 Assets/Firebase/FirebaseAI/Internal/HttpHelpers.cs
 Assets/Firebase/FirebaseAI/Internal/InternalHelpers.cs
 Assets/Firebase/FirebaseAI/LiveGenerationConfig.cs

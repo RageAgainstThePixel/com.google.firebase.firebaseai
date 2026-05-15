@@ -16,6 +16,7 @@
 
 using System;
 using System.Net.Http;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Firebase.AI.Internal
@@ -67,19 +68,6 @@ namespace Firebase.AI.Internal
       }
     }
 
-    internal static async Task SetRequestHeaders(HttpRequestMessage request, FirebaseApp firebaseApp)
-    {
-      request.Headers.Add("x-goog-api-key", firebaseApp.Options.ApiKey);
-      string version = FirebaseInterops.GetVersionInfoSdkVersion();
-      request.Headers.Add("x-goog-api-client", $"gl-csharp/8.0 fire/{version}");
-      if (FirebaseInterops.GetIsDataCollectionDefaultEnabled(firebaseApp))
-      {
-        request.Headers.Add("X-Firebase-AppId", firebaseApp.Options.AppId);
-        request.Headers.Add("X-Firebase-AppVersion", UnityEngine.Application.version);
-      }
-      // Add additional Firebase tokens to the header.
-      await FirebaseInterops.AddFirebaseTokensAsync(request, firebaseApp);
-    }
 
     // Helper function to throw an exception if the Http Response indicates failure.
     // Useful as EnsureSuccessStatusCode can leave out relevant information.
@@ -108,8 +96,10 @@ namespace Firebase.AI.Internal
       // Construct the exception with as much information as possible.
       var ex = new HttpRequestException(
         $"HTTP request failed with status code: {(int)response.StatusCode} ({response.ReasonPhrase}).\n" +
-        $"Error Content: {errorContent}"
+        $"Error Content: {errorContent}",
+        null
       );
+      ex.Data["StatusCode"] = response.StatusCode;
 
       throw ex;
     }
