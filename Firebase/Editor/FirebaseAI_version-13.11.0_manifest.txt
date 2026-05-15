@@ -1,7 +1,9 @@
+Assets/Firebase/FirebaseAI/AssemblyInfo.cs
 Assets/Firebase/FirebaseAI/Candidate.cs
 Assets/Firebase/FirebaseAI/Chat.cs
 Assets/Firebase/FirebaseAI/Citation.cs
 Assets/Firebase/FirebaseAI/CountTokensResponse.cs
+Assets/Firebase/FirebaseAI/Firebase.FirebaseAI.asmdef
 Assets/Firebase/FirebaseAI/FirebaseAI.cs
 Assets/Firebase/FirebaseAI/FunctionCalling.cs
 Assets/Firebase/FirebaseAI/GenerateContentResponse.cs
