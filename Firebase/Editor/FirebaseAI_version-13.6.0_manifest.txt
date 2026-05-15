@@ -25,5 +25,6 @@ Assets/Firebase/FirebaseAI/RequestOptions.cs
 Assets/Firebase/FirebaseAI/ResponseModality.cs
 Assets/Firebase/FirebaseAI/Safety.cs
 Assets/Firebase/FirebaseAI/Schema.cs
+Assets/Firebase/FirebaseAI/TemplateGenerativeModel.cs
 Assets/Firebase/FirebaseAI/URLContext.cs
 Assets/package.json
