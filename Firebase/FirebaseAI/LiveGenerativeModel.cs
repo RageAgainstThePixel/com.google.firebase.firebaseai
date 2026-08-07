@@ -34,7 +34,7 @@ namespace Firebase.AI
   /// for more details about the low-latency, two-way interactions that use text,
   /// audio, and video input, with audio and text output.
   ///
-  /// > Warning: For Firebase AI, Live Model
+  /// > Warning: This API
   /// is in Public Preview, which means that the feature is not subject to any SLA
   /// or deprecation policy and could change in backwards-incompatible ways.
   /// </summary>
@@ -76,7 +76,8 @@ namespace Firebase.AI
 
     private string GetURL()
     {
-      if (_backend.Provider == FirebaseAI.Backend.InternalProvider.VertexAI)
+      if (_backend.Provider == FirebaseAI.Backend.InternalProvider.VertexAI ||
+          _backend.Provider == FirebaseAI.Backend.InternalProvider.AgentPlatform)
       {
         return "wss://firebasevertexai.googleapis.com/ws" +
                "/google.firebase.vertexai.v1beta.LlmBidiService/BidiGenerateContent" +
@@ -97,7 +98,8 @@ namespace Firebase.AI
 
     private string GetModelName()
     {
-      if (_backend.Provider == FirebaseAI.Backend.InternalProvider.VertexAI)
+      if (_backend.Provider == FirebaseAI.Backend.InternalProvider.VertexAI ||
+          _backend.Provider == FirebaseAI.Backend.InternalProvider.AgentPlatform)
       {
         return $"projects/{_firebaseApp.Options.ProjectId}/locations/{_backend.Location}" +
                $"/publishers/google/models/{_modelName}";
