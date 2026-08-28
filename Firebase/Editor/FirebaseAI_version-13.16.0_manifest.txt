@@ -13,6 +13,7 @@ Assets/Firebase/FirebaseAI/Imagen/ImagenConfig.cs
 Assets/Firebase/FirebaseAI/Imagen/ImagenModel.cs
 Assets/Firebase/FirebaseAI/Imagen/ImagenResponse.cs
 Assets/Firebase/FirebaseAI/Imagen/ImagenSafety.cs
+Assets/Firebase/FirebaseAI/Internal/AudioHelpers.cs
 Assets/Firebase/FirebaseAI/Internal/EnumConverters.cs
 Assets/Firebase/FirebaseAI/Internal/HttpHelpers.cs
 Assets/Firebase/FirebaseAI/Internal/InternalHelpers.cs
@@ -23,6 +24,7 @@ Assets/Firebase/FirebaseAI/LiveSession.cs
 Assets/Firebase/FirebaseAI/LiveSessionResponse.cs
 Assets/Firebase/FirebaseAI/ModalityTokenCount.cs
 Assets/Firebase/FirebaseAI/ModelContent.cs
+Assets/Firebase/FirebaseAI/RealtimeInputConfig.cs
 Assets/Firebase/FirebaseAI/RequestOptions.cs
 Assets/Firebase/FirebaseAI/ResponseModality.cs
 Assets/Firebase/FirebaseAI/Safety.cs

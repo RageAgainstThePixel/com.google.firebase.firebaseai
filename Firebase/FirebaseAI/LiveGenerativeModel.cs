@@ -128,7 +128,7 @@ namespace Firebase.AI
       if (Firebase.Internal.FirebaseInterops.GetIsDataCollectionDefaultEnabled(_firebaseApp))
       {
         clientWebSocket.Options.SetRequestHeader("X-Firebase-AppId", _firebaseApp.Options.AppId);
-        clientWebSocket.Options.SetRequestHeader("X-Firebase-AppVersion", UnityEngine.Application.version);
+        clientWebSocket.Options.SetRequestHeader("X-Firebase-AppVersion", Firebase.Internal.FirebaseInterops.GetApplicationVersion());
       }
       // Add additional Firebase tokens to the header.
       await Firebase.Internal.FirebaseInterops.AddFirebaseTokensAsync(clientWebSocket, _firebaseApp, limitedUseAppCheckTokens: _useLimitedUseAppCheckTokens);
@@ -170,6 +170,8 @@ namespace Firebase.AI
           setupDict.AddIfHasValue("outputAudioTranscription", _liveConfig?.OutputAudioTranscription?.ToJson());
           // Similarly for the Context Window Compression.
           setupDict.AddIfHasValue("contextWindowCompression", _liveConfig?.ContextWindowCompression?.ToJson());
+          // And Realtime Input Config
+          setupDict.AddIfHasValue("realtimeInputConfig", _liveConfig?.RealtimeInputConfig?.ToJson());
         }
         setupDict.AddIfHasValue("systemInstruction", _systemInstruction?.ToJson());
         if (_tools != null && _tools.Length > 0)
@@ -182,7 +184,11 @@ namespace Firebase.AI
           { "setup", setupDict }
         };
 
-        var byteArray = Encoding.UTF8.GetBytes(Json.Serialize(jsonDict));
+        var serializedSetup = Json.Serialize(jsonDict);
+#if FIREBASEAI_DEBUG_LOGGING
+        UnityEngine.Debug.Log($"[LiveGenerativeModel] Sending setup message: {serializedSetup}");
+#endif
+        var byteArray = Encoding.UTF8.GetBytes(serializedSetup);
         await clientWebSocket.SendAsync(new ArraySegment<byte>(byteArray), WebSocketMessageType.Binary, true, cancellationToken);
       }
       catch (Exception)
