@@ -37,7 +37,6 @@ namespace Firebase.AI
       internal enum InternalProvider
       {
         GoogleAI,
-        VertexAI,
         AgentPlatform,
       }
 
@@ -64,26 +63,6 @@ namespace Firebase.AI
       public static Backend GoogleAI()
       {
         return new Backend(InternalProvider.GoogleAI);
-      }
-
-      /// <summary>
-      /// The Vertex AI backend service configuration.
-      /// </summary>
-      /// <param name="location">The region identifier, defaulting to `us-central1`</param>
-      /// <remarks>
-      /// Deprecated: Use AgentPlatform instead. Note that the default location changes to 'global'.
-      /// </remarks>
-      /// @deprecated Use AgentPlatform instead. Note that the default location changes to 'global'.
-      [Obsolete("Use AgentPlatform instead. Note that the default location changes to 'global'.")]
-      public static Backend VertexAI(string location = "us-central1")
-      {
-        if (string.IsNullOrWhiteSpace(location) || location.Contains("/"))
-        {
-          throw new ArgumentException(
-              $"The location argument must be non-empty, and not contain special characters like '/'");
-        }
-
-        return new Backend(InternalProvider.VertexAI, location);
       }
 
       /// <summary>
@@ -161,12 +140,14 @@ namespace Firebase.AI
 
       // FirebaseAI instances are keyed by a combination of the app name and backend.
       string key = $"{app.Name}::{resolvedBackend}::{useLimitedUseAppCheckTokens}";
-      if (_instances.ContainsKey(key))
-      {
-        return _instances[key];
-      }
-
-      return _instances.GetOrAdd(key, _ => new FirebaseAI(app, resolvedBackend, useLimitedUseAppCheckTokens));
+      // An App with the same name may have been disposed and re-created (e.g. Enter Play Mode
+      // with domain reload disabled, or an explicit FirebaseApp.Dispose()). Only reuse a cached
+      // instance if it is bound to this exact App object.
+      return _instances.AddOrUpdate(key,
+          _ => new FirebaseAI(app, resolvedBackend, useLimitedUseAppCheckTokens),
+          (_, existing) => ReferenceEquals(existing._firebaseApp, app)
+              ? existing
+              : new FirebaseAI(app, resolvedBackend, useLimitedUseAppCheckTokens));
     }
 
     /// <summary>
